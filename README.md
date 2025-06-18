@@ -1,2 +1,2 @@
 # Fake_Siege
-This project has been brewing in the back of my mind for a while, and I have finally decided to start it. Here is where I will push all of my code to, for others to (hopefully) wnjoy and maybe even learn from. This is as much a passion project as it is a learning experience. Thanks for looking at this :).
+This project has been brewing in the back of my mind for a while, and I have finally decided to start it. Here is where I will push all of my code to, for others to (hopefully) enjoy and maybe even learn from. This is as much a passion project as it is a learning experience. Thanks for looking at this :).
