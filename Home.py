@@ -10,6 +10,7 @@
 
 import random
 from Operators import *
+from Games import *
 
 ######################
 ### INITIALISATION ###
@@ -24,13 +25,28 @@ names.append(def1("name"))
 ### FUNCTIONS ###
 #################
 
-def menu(wt):
+def gameselect():
+    choice = input("\n1) Training\n"
+                    "2) Quick\n"
+                    "3) Normal\n"
+                    "4) Ranked\n\n")
+       
+    if choice == "1":
+        training()
+    elif choice == "2":
+        quick()
+    elif choice == "3":
+        normal()
+    elif choice == "4":
+        ranked()
+
+def menu():
     choice = input("\n1) Play\n"
                    "2) Operators\n"
                    "3) Exit\n\n")
     
     if choice == "1":
-            print("Play")
+            gameselect()
     elif choice == "2":
             choice = input(f"\n1) {names[0]}\n"
                            f"2) {names[1]}\n\n")
@@ -39,7 +55,6 @@ def menu(wt):
                    atk1("view")
             elif choice == "2":
                    def1("view")
-
     elif choice == "3":
             print("Exit")
 
