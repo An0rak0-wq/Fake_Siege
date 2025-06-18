@@ -10,7 +10,7 @@ def atk1(mde):
     primary = "AR"
     secondary = "Handgun"
     special = "Increased Speed"
-    name = "test 1"
+    name = "Surge"
 
     if mde == "view":
         overview(health, primary, secondary, special)
@@ -22,7 +22,7 @@ def def1(mde):
     primary = "Shotgun"
     secondary = "Handgun"
     special = "Fortify Wall"
-    name = "test 2"
+    name = "Citadel"
 
     if mde == "view":
         overview(health, primary, secondary, special)

@@ -11,27 +11,29 @@
 import random
 from Operators import *
 
-###############################
-### VARIABLE INITIALISATION ###
-###############################
+######################
+### INITIALISATION ###
+######################
 
 exit = False
+names = []
+names.append(atk1("name"))
+names.append(def1("name"))
 
 #################
 ### FUNCTIONS ###
 #################
 
-def menu():
+def menu(wt):
     choice = input("\n1) Play\n"
                    "2) Operators\n"
-                   "3) Settings\n"
-                   "4) Exit\n")
+                   "3) Exit\n\n")
     
     if choice == "1":
             print("Play")
     elif choice == "2":
-            choice = input(f"\n1) atk1\n"
-                           f"2) def1\n")
+            choice = input(f"\n1) {names[0]}\n"
+                           f"2) {names[1]}\n\n")
             
             if choice == "1":
                    atk1("view")
@@ -39,8 +41,6 @@ def menu():
                    def1("view")
 
     elif choice == "3":
-            print("Settings")
-    elif choice == "4":
             print("Exit")
 
 ############
