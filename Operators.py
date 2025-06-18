@@ -16,6 +16,8 @@ def atk1(mde):
         overview(health, primary, secondary, special)
     elif mde == "name":
         return name
+    elif mde == "get":
+        return health, primary, secondary, special, name
 
 def def1(mde):
     health = "150"
@@ -28,3 +30,5 @@ def def1(mde):
         overview(health, primary, secondary, special)
     elif mde == "name":
         return name
+    elif mde == "get":
+        return health, primary, secondary, special, name

@@ -8,7 +8,7 @@
 ### IMPORTS ###
 ###############
 
-import random
+import random, sys
 from Operators import *
 from Games import *
 
@@ -52,11 +52,11 @@ def menu():
                            f"2) {names[1]}\n\n")
             
             if choice == "1":
-                   atk1("view")
+                    atk1("view")
             elif choice == "2":
-                   def1("view")
-    elif choice == "3":
-            print("Exit")
+                    def1("view")
+            elif choice == "3":
+                    sys.exit()
 
 ############
 ### MAIN ###
