@@ -1,4 +1,13 @@
+###############
+### IMPORTS ###
+###############
+
 from Operators import *
+import random
+
+#################
+### FUNCTIONS ###
+#################
 
 def opsl(side):
     names = []
@@ -20,19 +29,28 @@ def opsl(side):
         print(f"\nChosen operator - {names[choice - 1]}\n")
 
         if choice == 1:
-            health, primary, secondary, special, name = atk1("get")
+            health, primary, secondary, special = atk1("get")
 
-        return health, primary, secondary, special, name
+        return health, primary, secondary, special
+    
+def fight(vsop, plop, side):
+    if side == "def":
+        if vsop == "Surge":
+            enmHealth, enmPrimary, enmSecondary, enmSpecial = atk1("get")
+
+        print(enmHealth)
+        print(enmPrimary)
+        print(enmSecondary)
+        print(enmSpecial)
 
 def training():
     side = "def"
-    health, primary, secondary, special, name = opsl(side)
+    health, primary, secondary, special = opsl(side)
 
-    print(health)
-    print(primary)
-    print(secondary)
-    print(special)
-    print(name)
+    if side == "def":
+        atkenm = ["Surge"]
+        num = random.randint(0, (len(atkenm)-1))
+        enmNm = atkenm[num]
 
 def quick():
     print("Quick")
