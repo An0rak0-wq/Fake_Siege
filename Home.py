@@ -9,6 +9,7 @@
 ###############
 
 import random
+from Operators import *
 
 ###############################
 ### VARIABLE INITIALISATION ###
