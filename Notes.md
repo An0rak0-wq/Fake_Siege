@@ -1,7 +1,7 @@
-### ACT 1: Fight requirements
+# ACT 1: Fight requirements
 ---
 
-##### SCENE 1: 
+### SCENE 1: 
 
 Requirements for a fight:
 1. Enemy(s)
@@ -31,3 +31,41 @@ Fire - shoot
 Peek and fire - look - and if the enemy is there, shoot
 
 The adv to peek and fire is that it conserves ammo.
+
+I'll get these scenarios broken down, with the hopes of getting something I can code.
+
+---
+# ACT 2: Entry
+---
+
+### SCENE 1:
+
+Forget drone phase for now, action phase has begun. The function should look like this:
+
+```python
+def entry(loc):
+```
+
+It controls the entry into the building, and probably the entry into all rooms in the building just to keep code more compact. However, it may need to know if the player is outside or not, so that it can apply appropriate context, so let's add that.
+
+```python
+def entry(loc, out):
+```
+
+Let's take it as loc = 1a and out = True, where 1a is the code for the entrance (which will be connected to a title in a dictionary so the player gets given a name) and True means that the player is outside. The function is as follows:
+
+```python
+def entry("1a", True):
+```
+
+It should print a statement to the player, saying where they have entered.
+
+```python
+loc = "1a"
+out = True
+
+def entry(loc, out):
+    print(f"You have entered {loc}")
+```
+
+### SCENE 2:
