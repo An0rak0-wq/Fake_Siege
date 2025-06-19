@@ -22,6 +22,7 @@ def opsl(side):
             health, primary, secondary, special, name = atk1("get")
 
         return health, primary, secondary, special, name
+    
     elif side == "def":
         names.append(def1("name"))
         choice = int(input(f"\n1) {names[0]}\n\n"))
