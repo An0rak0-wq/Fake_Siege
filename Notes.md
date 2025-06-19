@@ -69,3 +69,84 @@ def entry(loc, out):
 ```
 
 ### SCENE 2:
+
+While that statement works, it gets very repetitive and boring, very quickly. But as I said, it works. As they say, don't fix what ain't broken. So we'll get to work on something else and refine it later.
+
+Now, I believe it would be usefull to know if an enemy is in the location the player has entered. For simplicity's sake, lets say that entrance 1a (Which i shall now rename e1, e for entrance/exit and 1 as it is the first) leads into r1 (room 1). We need a way of knowing what entrance leads to what room. This can be managed within an array, which outputs whether the room is populated (boolean output) and by how many (integer output). It will need the room code, which I will sort out in another function in a latter scene/act. For now:
+
+```python
+def enmcheck(rmcd):
+```
+
+We now need a way of knowing where each enemy is. We can use a 2d array for this, which can store the operator name and room code
+
+```python
+enmloc = [["op1", "op2", "op3", "op4", "op5"]
+          ["r1", "r2", "r3", "r4", "r5"]]
+```
+
+The function will have access to this, so now attention can be turned back to it. We first need to check if the room code is in the array.
+
+```python
+def enmcheck(rmcd):
+    if rmcd in enmloc:
+```
+
+If the room code is in the array, we then need to get the index so we can get the operator(s) name(s).
+
+```python
+def enmcheck(rmcd):
+    if rmcd in enmloc:
+        index = enmloc.index(rmcd)
+```
+
+### SCENE 3:
+
+After testing, I found that a 2d array is not working nicely. I've decided to change it to a dictionary.
+
+```python
+enmloc = {
+    "op1": "rm1",
+    "op2": "rm2",
+    "op3": "rm3",
+    "op4": "rm4",
+    "op5": "rm5",
+}
+```
+
+And due to the loop I am using to get the key, I have decided that no operaotrs will be generated into the same room as another. Here is the following loop: 
+
+```python
+for key, val in enmloc.items():
+    if val == rmcd:
+        print(key) 
+```
+
+So the function will now look like this
+
+```python
+def enmcheck(rmcd):
+    for key, val in enmloc.items():
+        if val == rmcd:
+            print(key) 
+```
+
+But we do not want the key printed, we want it returned. And if it is returned empty, then we can return false for enemies in the room. Furthermore, we no longer need to return how many enemies populate the room, but we do need the operator name. We can reuse the function created in Operators.py to easily get the name.
+
+```python
+def enmcheck(rmcd):
+    opnm = ""
+
+    for key, val in enmloc.items():
+        if val == rmcd:
+            opnm = key
+
+    if opnm == def1():
+        opnm = def1("name")
+        return True, opnm
+
+    if opnm == "":
+        return False, ""
+```
+
+I will now test this code.
