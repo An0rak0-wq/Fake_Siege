@@ -5,6 +5,20 @@
 from Operators import *
 import random
 
+####################
+### DICTIONARIES ###
+####################
+
+enmloc = {
+}
+
+###############################
+### VARIABLE INITIALISATION ###
+###############################
+
+loc = ""
+out = True
+
 #################
 ### FUNCTIONS ###
 #################
@@ -34,24 +48,43 @@ def opsl(side):
 
         return health, primary, secondary, special
     
-def fight(vsop, plop, side):
-    if side == "def":
-        if vsop == "Surge":
-            enmHealth, enmPrimary, enmSecondary, enmSpecial = atk1("get")
+def enmcheck(rmcd, enmloc):
+    opnm = ""
 
-        print(enmHealth)
-        print(enmPrimary)
-        print(enmSecondary)
-        print(enmSpecial)
+    for key, val in enmloc.items():
+        if val == rmcd:
+            opnm = key
+
+    if opnm == def1("name"):
+        opnm = def1("name")
+        return True, opnm
+    elif opnm == atk1("name"):
+        opnm = atk1("name")
+        return True, opnm
+
+    if opnm == "":
+        return False, opnm
+    
+def entry(loc, out, enmloc):
+    if out == True:
+        if loc == "e1":
+            enmpres, opnm = enmcheck("r1", enmloc)
+            print(enmpres)
+            print(opnm)
 
 def training():
     side = "def"
     health, primary, secondary, special = opsl(side)
 
-    if side == "def":
-        atkenm = ["Surge"]
-        num = random.randint(0, (len(atkenm)-1))
-        enmNm = atkenm[num]
+    enmloc = {
+        "Surge": "r1"
+    }
+
+    loc = "e1"
+    out = True
+
+    entry(loc, out, enmloc)
+
 
 def quick():
     print("Quick")

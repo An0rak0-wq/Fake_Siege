@@ -201,5 +201,6 @@ def entry(loc, out):
             print(opnm)
 ```
 
+---
 # ACT 3: PLAYER INTERACTION
-
+---
