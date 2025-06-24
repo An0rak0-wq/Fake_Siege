@@ -20,9 +20,9 @@ Example (for analysis):
 
 TP - tactical points. These are spent each turn in order to create some form of strategy
 
-> "1) Run (0.5 TP)
-> "2) Peek (0.5 TP)
-> "3) Fire (1 TP)
+> "1) Run (0.5 TP)\
+> "2) Peek (0.5 TP)\
+> "3) Fire (1 TP)\
 > "4) Peek and fire (3 TP)"
 
 Run - run away
@@ -106,15 +106,15 @@ After testing, I found that a 2d array is not working nicely. I've decided to ch
 
 ```python
 enmloc = {
-    "op1": "rm1",
-    "op2": "rm2",
-    "op3": "rm3",
-    "op4": "rm4",
-    "op5": "rm5",
+    "op1": "r1",
+    "op2": "r2",
+    "op3": "r3",
+    "op4": "r4",
+    "op5": "r5",
 }
 ```
 
-And due to the loop I am using to get the key, I have decided that no operaotrs will be generated into the same room as another. Here is the following loop: 
+And due to the loop I am using to get the key, I have decided that no operators will be generated into the same room as another. Here is the following loop: 
 
 ```python
 for key, val in enmloc.items():
@@ -150,3 +150,56 @@ def enmcheck(rmcd):
 ```
 
 I will now test this code.
+
+### SCENE 4:
+
+This code seems to run, so I wil keep it for now. Going back to the entry procedure, I can now have it feed the room code to enmcheck as follows
+
+```python
+def entry(loc, out):
+    if out == True:
+        if loc == "e1":
+            enmpres, opnm = enmcheck("r1")
+        #Continue for other entrances
+```
+
+The code is functioning, and will work for all cases (once these cases are added). I will add the entire program below before moving on to the next section.
+
+```python
+from Operators import *
+
+enmloc = {
+    "Citadel": "r1",
+    "op2": "r2",
+    "op3": "r3",
+    "op4": "r4",
+    "op5": "r5",
+}
+
+loc = input(": ")
+out = True
+
+def enmcheck(rmcd):
+    opnm = ""
+
+    for key, val in enmloc.items():
+        if val == rmcd:
+            opnm = key
+
+    if opnm == def1("name"):
+        opnm = def1("name")
+        return True, opnm
+
+    if opnm == "":
+        return False, opnm
+    
+def entry(loc, out):
+    if out == True:
+        if loc == "e1":
+            enmpres, opnm = enmcheck("r1")
+            print(enmpres)
+            print(opnm)
+```
+
+# ACT 3: PLAYER INTERACTION
+
