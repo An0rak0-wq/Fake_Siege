@@ -204,3 +204,32 @@ def entry(loc, out):
 ---
 # ACT 3: PLAYER INTERACTION
 ---
+
+### SCENE 1:
+
+First off, I want to allow th player to pick their entrance. This will allow me to create more entrances, and therefore more rooms. The dictionary containing the entrance and room pairs will look similar to this:
+
+```python
+entrmpairs = {
+    "e1": "r1",
+    "e2": "r2",
+    "e3": "r3"
+}
+```
+
+Then, this can fed into the entry function.
+
+```python
+def entry(loc, out, enmloc, entrmpairs):
+    #code
+```
+
+Note that enmloc is now a parameter.
+
+The function needs to take input from the user to decide which room to "scan".
+
+```python
+def entry(loc, out, enmloc, entrmpairs):
+    loc = input(f"1) {entrmpairs["e1"]}")
+    if out == True:
+```

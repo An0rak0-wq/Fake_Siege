@@ -8,6 +8,12 @@ enmloc = {
     "op5": "r5",
 }
 
+entrmpairs = {
+    "e1": "r1",
+    "e2": "r2",
+    "e3": "r3"
+}
+
 loc = input(": ")
 out = True
 
@@ -32,4 +38,4 @@ def entry(loc, out):
             print(enmpres)
             print(opnm)
 
-entry(loc, out)
+loc = input(f"1) {entrmpairs["r1"]}")

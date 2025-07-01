@@ -33,9 +33,9 @@ def opsl(side):
         print(f"\nChosen operator - {names[choice - 1]}\n")
 
         if choice == 1:
-            health, primary, secondary, special, name = atk1("get")
+            health, primary, secondary, special = atk1("get")
 
-        return health, primary, secondary, special, name
+        return health, primary, secondary, special
     
     elif side == "def":
         names.append(def1("name"))
@@ -73,17 +73,30 @@ def entry(loc, out, enmloc):
             print(opnm)
 
 def training():
-    side = "def"
-    health, primary, secondary, special = opsl(side)
+    side = "atk"
 
-    enmloc = {
-        "Surge": "r1"
-    }
+    if side == "def":
+        health, primary, secondary, special = opsl(side)
 
-    loc = "e1"
-    out = True
+        atkenmloc = {
+            "Surge": "r1"
+        }
 
-    entry(loc, out, enmloc)
+        loc = "e1"
+        out = True
+
+        entry(loc, out, atkenmloc)
+    else:
+        health, primary, secondary, special = opsl(side)
+
+        defenmloc = {
+            "Citadel": "r1"
+        }
+
+        loc = "e1"
+        out = True
+
+        entry(loc, out, defenmloc)
 
 
 def quick():
