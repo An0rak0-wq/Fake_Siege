@@ -16,14 +16,14 @@ Position is tricky. A map may need to be drawn (I really don't want to do this, 
 ### SCENE 3:
 
 Example (for analysis):
-> "You enter the barricade. An enemy is on the stairs and open fire. 2TP are consumed going for cover, and 30 dmg taken"
+> You enter the barricade. An enemy is on the stairs and open fire. 2TP are consumed going for cover, and 30 dmg taken
 
 TP - tactical points. These are spent each turn in order to create some form of strategy
 
-> "1) Run (0.5 TP)\
-> "2) Peek (0.5 TP)\
-> "3) Fire (1 TP)\
-> "4) Peek and fire (3 TP)"
+> 1) Run (0.5 TP)<br>
+> 2) Peek (0.5 TP)<br>
+> 3) Fire (1 TP)<br>
+> 4) Peek and fire (3 TP)
 
 Run - run away
 Peek - see if the enemy is still there 
@@ -233,3 +233,34 @@ def entry(loc, out, enmloc, entrmpairs):
     loc = input(f"1) {entrmpairs["e1"]}")
     if out == True:
 ```
+
+### SCENE 2:
+
+The player can now interact with the game so far as to pick their operator from the two available on each side, and to pick their entrance (which are yet to get names, so are still presented as room/entrance codes). Now, it is important that the player gets a message if an operator is there. For now, this should suffice. The message should look as follows:
+
+> You enter {xyz}, and an enemy is there
+
+After this, the player should be presented with two options:
+
+> 1) Identify and take cover (2 TP)<br>
+> 2) Take cover (1 TP)
+
+From here, the program goes on to either tell the player the name of the operator or to set the players status to "safe" (I am planning to create three states for the player; safe, semi-same/partially safe or unsafe) and initiate the fight.
+
+The program first need to decide whether to display the message for enemy presence. Currently, the program returns and prints True is an enemy is present and false if there isn't. Instead, there should be an if statement to handle this
+
+```python
+if enmpres == True:
+    print(f"You enter through {loc} and an enemy is there.")
+
+    choice = input("1) Identify and take cover (2 TP)\n"
+                    "2) Take cover (1 TP)\n")
+else:
+    print(f"You enter through {loc}. There are no enemies.")
+
+    choice = input("1) Move (0.5 TP)\n"
+                    "2) Use ability (2 TP)\n"
+                    "3) Take cover (1 TP)\n")
+```
+
+This adapts to where the player is so can be used universally.
