@@ -18,33 +18,61 @@ enmloc = {
 
 loc = ""
 out = True
+sides = ["atk", "def"]
+
+entrmpairs = {
+    "e1": "r1",
+    "e2": "r2",
+    "e3": "r3"
+}
+
+e1 = "e1"
+e2 = "e2"
+e3 = "e3"
 
 #################
 ### FUNCTIONS ###
 #################
 
+def Side(sides):
+    return random.choice(sides)
+
 def opsl(side):
     names = []
 
     if side == "atk":
-        names.append(atk1("name"))
-        choice = int(input(f"\n1) {names[0]}\n\n"))
+        operators = [atk1, atk2]
+    else:
+        operators = [def1, def2]
+
+    for op in operators:
+        names.append(op("name"))
+
+    if side == "atk":
+        print("\nYou are on attack")
+
+        for i, name in enumerate(names, start=1):
+            print(f"{i}) {name}")
+
+        choice = int(input("\nChoose your operator: "))
 
         print(f"\nChosen operator - {names[choice - 1]}\n")
 
-        if choice == 1:
-            health, primary, secondary, special = atk1("get")
-
+        health, primary, secondary, special = operators[choice - 1]("get")
+        
         return health, primary, secondary, special
     
     elif side == "def":
-        names.append(def1("name"))
-        choice = int(input(f"\n1) {names[0]}\n\n"))
+        print("\nYou are on defence")
+        
+        for i, name in enumerate(names, start=1):
+            print(f"{i}) {name}")
+
+        choice = int(input("\nChoose your operator: "))
 
         print(f"\nChosen operator - {names[choice - 1]}\n")
 
-        if choice == 1:
-            health, primary, secondary, special = atk1("get")
+        health, primary, secondary, special = operators[choice - 1]("get")
 
         return health, primary, secondary, special
     
@@ -56,10 +84,9 @@ def enmcheck(rmcd, enmloc):
             opnm = key
 
     if opnm == def1("name"):
-        opnm = def1("name")
         return True, opnm
+    
     elif opnm == atk1("name"):
-        opnm = atk1("name")
         return True, opnm
 
     if opnm == "":
@@ -67,37 +94,23 @@ def enmcheck(rmcd, enmloc):
     
 def entry(loc, out, enmloc):
     if out == True:
-        if loc == "e1":
+        if loc == "1":
             enmpres, opnm = enmcheck("r1", enmloc)
             print(enmpres)
             print(opnm)
 
-def training():
-    side = "atk"
+def singlernd():
+    side = Side(sides)
+    health, primary, secondary, special = opsl(side)
 
-    if side == "def":
-        health, primary, secondary, special = opsl(side)
+    enmloc = {"Surge": "r1"} if side == "def" else {"Citadel": "r1"}
 
-        atkenmloc = {
-            "Surge": "r1"
-        }
+    loc = input(f" 1) {entrmpairs[e1]}\n "
+                f"2) {entrmpairs[e2]}\n "
+                f"3) {entrmpairs[e3]}\n ")
 
-        loc = "e1"
-        out = True
-
-        entry(loc, out, atkenmloc)
-    else:
-        health, primary, secondary, special = opsl(side)
-
-        defenmloc = {
-            "Citadel": "r1"
-        }
-
-        loc = "e1"
-        out = True
-
-        entry(loc, out, defenmloc)
-
+    out = True
+    entry(loc, out, enmloc)
 
 def quick():
     print("Quick")

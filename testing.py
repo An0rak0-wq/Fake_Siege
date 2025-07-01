@@ -14,7 +14,11 @@ entrmpairs = {
     "e3": "r3"
 }
 
-loc = input(": ")
+e1 = "e1"
+e2 = "e2"
+e3 = "e3"
+
+loc = e1
 out = True
 
 def enmcheck(rmcd):
@@ -33,9 +37,11 @@ def enmcheck(rmcd):
     
 def entry(loc, out):
     if out == True:
-        if loc == "e1":
+        if loc == "1":
             enmpres, opnm = enmcheck("r1")
             print(enmpres)
             print(opnm)
 
-loc = input(f"1) {entrmpairs["r1"]}")
+loc = input(f"1) {entrmpairs[e1]} ")
+
+entry(loc, True)

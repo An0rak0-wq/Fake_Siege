@@ -32,7 +32,7 @@ def gameselect():
                     "4) Ranked\n\n")
        
     if choice == "1":
-        training()
+        singlernd()
     elif choice == "2":
         quick()
     elif choice == "3":
