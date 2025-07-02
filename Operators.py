@@ -50,7 +50,7 @@ def def1(mde):
 def def2(mde):
     health = "170"
     primary = "LMG"
-    secondary = "Pistol"
+    secondary = "Handgun"
     special = "Deployable Shield"
     name = "Bulwark"
 
