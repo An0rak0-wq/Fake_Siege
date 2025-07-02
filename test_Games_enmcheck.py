@@ -11,5 +11,12 @@ atkenmloc = {
     "Bulwark": "r2"
 }
 
-def test_enmcheck_1r1(atkenmloc):
-    rmcd = "r1"
+def test_enmcheck_occupied(): 
+    expected_output = (True, "Citadel")
+    result = enmcheck("r1", atkenmloc)
+    assert result == expected_output, f"Expected {expected_output}, but got {result}" 
+
+def test_enmcheck_empty():
+    expected_output = (False, "")
+    result = enmcheck("r3", atkenmloc)
+    assert result == expected_output, f"Expected {expected_output}, but got {result}"
