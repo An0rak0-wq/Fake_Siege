@@ -19,6 +19,7 @@ enmloc = {
 loc = ""
 out = True
 sides = ["atk", "def"]
+side = ""
 
 entrmpairs = {
     "e1": "r1",
@@ -97,64 +98,67 @@ def enmcheck(rmcd, enmloc):
     if opnm == "":
         return False, opnm
     
-def entry(loc, out, enmloc):
-    if out == True:
-
+def entry(out, enmloc, side):
+    if out == True and side == "atk":
+        loc = input(f" 1) {entrmpairs[e1]}\n "
+                    f"2) {entrmpairs[e2]}\n "
+                    f"3) {entrmpairs[e3]}\n\n ")
+            
         if loc == "1":
             enmpres, enmname = enmcheck(entrmpairs[e1], enmloc)
 
             if enmpres == True:
-                print(f"You enter through {e1} and an enemy is there.")
+                print(f"\nYou enter through {e1} and an enemy is there.")
 
                 choice = input("1) Identify and take cover (2 TP)\n"
-                                "2) Take cover (1 TP)\n")
+                                "2) Take cover (1 TP)\n\n")
             else:
-                print(f"You enter through {e1}. There are no enemies.")
+                print(f"\nYou enter through {e1}. There are no enemies.")
 
                 choice = input("1) Move (0.5 TP)\n"
                                 "2) Use ability (2 TP)\n"
-                                "3) Take cover (1 TP)\n")
+                                "3) Take cover (1 TP)\n\n")
         elif loc == "2":
             enmpres, enmname = enmcheck(entrmpairs[e2], enmloc)
 
             if enmpres == True:
-                print(f"\nYou enter through {e2} and an enemy is there.\n")
+                print(f"\nYou enter through {e2} and an enemy is there.")
 
                 choice = input("\n1) Identify and take cover (2 TP)\n"
-                                "2) Take cover (1 TP)\n")
+                                "2) Take cover (1 TP)\n\n")
             else:
-                print(f"You enter through {e2}. There are no enemies.")
+                print(f"\nYou enter through {e2}. There are no enemies.")
 
                 choice = input("1) Move (0.5 TP)\n"
                                 "2) Use ability (2 TP)\n"
-                                "3) Take cover (1 TP)\n")
+                                "3) Take cover (1 TP)\n\n")
         elif loc == "3":
             enmpres, enmname = enmcheck(entrmpairs[e3], enmloc)
 
             if enmpres == True:
-                print(f"You enter through {e3} and an enemy is there.")
+                print(f"\nYou enter through {e3} and an enemy is there.")
 
                 choice = input("1) Identify and take cover (2 TP)\n"
-                                "2) Take cover (1 TP)\n")
+                                "2) Take cover (1 TP)\n\n")
             else:
-                print(f"You enter through {e3}. There are no enemies.")
+                print(f"\nYou enter through {e3}. There are no enemies.")
 
                 choice = input("1) Move (0.5 TP)\n"
                                 "2) Use ability (2 TP)\n"
-                                "3) Take cover (1 TP)\n")
+                                "3) Take cover (1 TP)\n\n")
+    else:
+        print("Pick a bomb site.")
 
-def singlernd():
-    side = Side(sides)
+def singlernd(side):
+    if side == "":
+        side = Side(sides)
+
     health, primary, secondary, special = opsl(side)
 
     enmloc = {"Surge": "r1", "Vortex": "r2"} if side == "def" else {"Citadel": "r1", "Bulwark": "r2"}
 
-    loc = input(f" 1) {entrmpairs[e1]}\n "
-                f"2) {entrmpairs[e2]}\n "
-                f"3) {entrmpairs[e3]}\n ")
-
     out = True
-    entry(loc, out, enmloc)
+    entry(out, enmloc, side)
 
 def quick():
     print("Quick")

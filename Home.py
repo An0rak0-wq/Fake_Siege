@@ -28,13 +28,13 @@ for func in opfunctions:
 #################
 
 def gameselect():
-    choice = input("\n1) Training\n"
+    choice = input("\n1) Single Round\n"
                     "2) Quick\n"
                     "3) Normal\n"
                     "4) Ranked\n\n")
        
     if choice == "1":
-        singlernd()
+        singlernd(side)
     elif choice == "2":
         quick()
     elif choice == "3":
