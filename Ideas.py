@@ -1,2 +1,4 @@
-choice = input("1) Identify and take cover (2 TP)\n"
-                    "2) Take cover (1 TP)")
+enemystats = [["Health", "TP", "Primary", "Secondary", "Location", "Status", "Ammo"], 
+                [180, 5, "AR", "Handgun", "e1", "safe", 100]]
+
+print(enemystats[1][1])

@@ -264,3 +264,76 @@ else:
 ```
 
 This adapts to where the player is so can be used universally.
+
+### SCENE 3:
+
+It's time for the big moment: considering the fights. Here is a list of stats required:
+1. Health
+2. TP
+3. Primary & secondary weapons
+4. Location
+5. Status
+6. Ammo
+
+I think the best way to store this is as a 2 dimensional list, as follows:
+
+```python
+playerstats = [["Health", "TP", "Primary", "Secondary", "Location", "Status", "Ammo"], 
+                [180, 5, "AR", "Handgun", "e1", "safe", 100]]
+```
+
+And the same can be done for the enemy's stats:
+
+```python
+enemystats = [["Health", "TP", "Primary", "Secondary", "Location", "Status", "Ammo"], 
+                [180, 5, "AR", "Handgun", "e1", "safe", 100]]
+```
+
+These can be passed into the function, and from there all the info can be unpacked
+
+```python
+def fight(playerstats, enmystats):
+```
+
+Now, a turn system has to be put in place. A variable called turn will contain the name of which party is currently having its turn, and an if statement can be used to switch whose turn it is. A while loop keeps things running until an operator dies (For now this will be the only way to end a fight).
+
+```python
+def fight(playerstats, enmystats):
+    while enemyalive == True and playeralive == True:
+        if turn == "Player":
+            #Allow the player to do there turn
+        elif turn == "Enemy":
+            #Allow the AS (Artificial Stupidity, as it will be dumb as rocks) to make (poor) decisions
+```
+
+The AS will, pretty much, always try to do the same thing. If the player is not safe, it will shoot. If the player is safe, it will peek and shoot (a new option that does not always work (every time a gun is fired, accuracy will be decided using random, but peek and shoot will have lower chances)). It will then use random to decide whether to take cover or not (probably around about a 50/50 chance).
+
+```python
+def fight(playerstats, enmystats):
+    while enemyalive == True and playeralive == True:
+        if turn == "Player":
+            #Allow the player to have their turn
+        elif turn == "Enemy":
+            if playerstats[1][5] != "safe":
+                peek_and_shoot({whatever variables go here})
+            else:
+                shoot({whatever variables go here})
+```
+
+### SCENE 4:
+
+First, I'll look at shoot(), as it's more likely to come up. It will require:
+1. Gun type
+2. Ammo
+
+If there is enough ammo, it wil go on to use random, but if not, will tell the enemy and which switch turn immediately
+
+```python
+else:
+    if gtype == "Secondary":
+        shoot(enmystats[1][2], enmystats[1][6])
+    elif gtype == "Primary":
+        shoot(enmystats[1][3], enmystats[1][6])
+```
+
+The ammo pool will be the total accumulation; i.e the ammo for the primary and secondary weapon combined.
