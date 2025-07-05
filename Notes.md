@@ -376,4 +376,31 @@ The variable "hidden" will be either not, partially or completely, showing the p
 
 This means some new claculations need to be made, and some new variables need to be returned.
 
-I will experiment with some possibilites, and then put the code down below.
+I will experiment with some possibilites.
+
+### SCENE 6:
+
+The calculations look as follows:
+
+> hits = shots fired * gun accuracy * accuracy
+
+Gun accuracy is a unique value, not so much accuracy but points that are unique to each weapon that changes the mult. For example, the AR has a weapon accuracy of 0.85. When 10 shots are fired at an operator who is not safe, there are 7 hits.
+This goes down to 4 if the weapon is changed to an SMG.
+
+Now damage must be calculated. This can be held within a 3rd section in the primaryguns/secondaryguns list.
+
+The weapon lists look as such:
+
+```python
+primaryguns = [["AR", "SMG", "LMG", "Shotgun"],
+               [0.85, 0.55, 0.95, 0.5],
+               [3.5, 2.05, 5, 2.45]]
+
+secondaryguns = [["Handgun", "Claws"],
+                [0.85, 1.25],
+                [3.45, 4.55]]
+```
+
+And by constructing another function, I can calculate the damage by multiplying hits by the weapon damage, and rounding it down.
+
+Now, this new and improved damage system needs to update the operator's health. This should be rather simple.

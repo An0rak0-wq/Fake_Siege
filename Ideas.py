@@ -1,4 +1,5 @@
 import random
+import math
 
 playerstats = [["Health", "TP", "Primary", "Secondary", "Location", "Status", "Ammo"], 
                 [180, 5, "AR", "Handgun", "e1", "unsafe", 100]]
@@ -8,20 +9,117 @@ enemystats = [["Health", "TP", "Primary", "Secondary", "Location", "Status", "Am
 
 gun_types = ["Secondary", "Primary"]
 
+primaryguns = [["AR", "SMG", "LMG", "Shotgun"],
+               [0.85, 0.55, 0.95, 0.5],
+               [3.5, 2.05, 5, 2.45]]
+
+secondaryguns = [["Handgun", "Claws"],
+                [0.85, 1.25],
+                [3.45, 4.55]]
+
 turn = "Enemy"
 
-def shoot(gtype, ammo, ophealth):
+hidden = "not"
+
+def shoot(gtype, ammo):
     ammo -= 1
-    ophealth -= 10
-    print(f"Shoot, {gtype}")
-    print(f"{ophealth}")
-    input()
-    return ammo, ophealth
+
+    Hits = hits(gtype, 10, hidden)
+    Dmg = dmg(Hits, gtype)
+
+    return ammo, Dmg
 
 def peek_and_shoot(gtype, ammo, ophealth):
     print(f"Peek and Shoot, {gtype}")
     print(f"{ophealth}")
     input()
+
+def hits(gtype, shotsfired, hidden):
+    if gtype in primaryguns[0]:
+        if hidden == "not":
+            accuracy = 0.85
+
+            index = primaryguns[0].index(gtype)
+            gunaccuracy = primaryguns[1][index]
+
+            mult = gunaccuracy * accuracy
+
+            hits = math.floor(shotsfired * mult)
+
+            print(f"Hits: {hits}")
+            return hits
+
+        elif hidden == "partially":
+            accuracy = 0.65
+
+            index = primaryguns[0].index(gtype)
+            gunaccuracy = primaryguns[1][index]
+
+            mult = gunaccuracy * accuracy
+
+            hits = math.floor(shotsfired * mult)
+
+            print(f"Hits: {hits}")
+            return hits
+
+        elif hidden == "completely":
+            accuracy = 0.45
+
+            index = primaryguns[0].index(gtype)
+            gunaccuracy = primaryguns[1][index]
+
+            mult = gunaccuracy * accuracy
+
+            hits = math.floor(shotsfired * mult)
+
+            print(f"Hits: {hits}")
+            return hits
+
+    elif gtype in secondaryguns[0]:
+        if hidden == "not":
+            accuracy = 0.65
+        
+            index = secondaryguns[0].index(gtype)
+            gunaccuracy = secondaryguns[1][index]
+
+            mult = gunaccuracy * accuracy
+
+            hits = math.floor(shotsfired * mult)
+
+            print(f"Hits: {hits}")
+            return hits
+
+        elif hidden == "partially":
+            accuracy = 0.65
+        
+            index = secondaryguns[0].index(gtype)
+            gunaccuracy = secondaryguns[1][index]
+
+            mult = gunaccuracy * accuracy
+
+            hits = math.floor(shotsfired * mult)
+
+            print(f"Hits: {hits}")
+            return hits
+            
+        elif hidden == "completely":
+            accuracy = 0.65
+        
+            index = secondaryguns[0].index(gtype)
+            gunaccuracy = secondaryguns[1][index]
+
+            mult = gunaccuracy * accuracy
+
+            hits = math.floor(shotsfired * mult)
+
+            print(f"Hits: {hits}")
+            return hits
+            
+def dmg(Hits, gtype):
+    if gtype in primaryguns[0]:
+        return math.floor(Hits * primaryguns[2][primaryguns[0].index(gtype)])
+    elif gtype in secondaryguns[0]:
+        return math.floor(Hits * secondaryguns[2][secondaryguns[0].index(gtype)])
 
 def fight(playerstats, enemystats):
     playeralive = True
@@ -39,18 +137,24 @@ def fight(playerstats, enemystats):
                 gtype = random.choice(gun_types)
 
                 if gtype == "Primary":
-                    ammo, health = shoot(enemystats[1][2], enemystats[1][6], playerstats[1][0])
+                    ammo, dmg = shoot(enemystats[1][2], enemystats[1][6])
                     enemystats[1][6] = ammo
-                    playerstats[1][0] = health
+                    playerstats[1][0] -= dmg
+
+                    print(playerstats[1][0])
+
                     turn = "Player"
 
                     if playerstats[1][0] <= 0:
                         playeralive = False
 
                 elif gtype == "Secondary":
-                    ammo, health = shoot(enemystats[1][3], enemystats[1][6], playerstats[1][0])
+                    ammo, dmg = shoot(enemystats[1][3], enemystats[1][6])
                     enemystats[1][6] = ammo
-                    playerstats[1][0] = health
+                    playerstats[1][0] -= dmg
+
+                    print(playerstats[1][0])
+
                     turn = "Player"
 
                     if playerstats[1][0] <= 0:
@@ -64,4 +168,5 @@ def fight(playerstats, enemystats):
                     peek_and_shoot(enemystats[1][3], enemystats[1][6], playerstats[1][0])
 
 fight(playerstats, enemystats)
+
 print("Player is dead")
