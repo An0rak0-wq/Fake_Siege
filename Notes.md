@@ -404,3 +404,7 @@ secondaryguns = [["Handgun", "Claws"],
 And by constructing another function, I can calculate the damage by multiplying hits by the weapon damage, and rounding it down.
 
 Now, this new and improved damage system needs to update the operator's health. This should be rather simple.
+
+### SCENE 7:
+
+Now, the time has come to get player input. First, the player needs to know what happened during the AS's turn.

@@ -27,7 +27,7 @@ def shoot(gtype, ammo):
     Hits = hits(gtype, 10, hidden)
     Dmg = dmg(Hits, gtype)
 
-    return ammo, Dmg
+    return ammo, Dmg, Hits
 
 def peek_and_shoot(gtype, ammo, ophealth):
     print(f"Peek and Shoot, {gtype}")
@@ -46,7 +46,6 @@ def hits(gtype, shotsfired, hidden):
 
             hits = math.floor(shotsfired * mult)
 
-            print(f"Hits: {hits}")
             return hits
 
         elif hidden == "partially":
@@ -59,7 +58,6 @@ def hits(gtype, shotsfired, hidden):
 
             hits = math.floor(shotsfired * mult)
 
-            print(f"Hits: {hits}")
             return hits
 
         elif hidden == "completely":
@@ -72,7 +70,6 @@ def hits(gtype, shotsfired, hidden):
 
             hits = math.floor(shotsfired * mult)
 
-            print(f"Hits: {hits}")
             return hits
 
     elif gtype in secondaryguns[0]:
@@ -86,7 +83,6 @@ def hits(gtype, shotsfired, hidden):
 
             hits = math.floor(shotsfired * mult)
 
-            print(f"Hits: {hits}")
             return hits
 
         elif hidden == "partially":
@@ -99,7 +95,6 @@ def hits(gtype, shotsfired, hidden):
 
             hits = math.floor(shotsfired * mult)
 
-            print(f"Hits: {hits}")
             return hits
             
         elif hidden == "completely":
@@ -112,8 +107,10 @@ def hits(gtype, shotsfired, hidden):
 
             hits = math.floor(shotsfired * mult)
 
-            print(f"Hits: {hits}")
             return hits
+        
+def msg(dmg, hits, gtype):
+    print(f"The enemy shoots at you with their {gtype}, hitting you {hits} time(s) and dealing {dmg} damage\n")
             
 def dmg(Hits, gtype):
     if gtype in primaryguns[0]:
@@ -128,34 +125,50 @@ def fight(playerstats, enemystats):
 
     while enemyalive == True and playeralive == True:
         if turn == "Player":
-            print("Player's turn")
-            input()
+            print("#################")
+            print("### YOUR TURN ###")
+            print("#################")
+            print()
+
+            print(f"Your health: {playerstats[1][0]}")
+            print(f"Your TP: {playerstats[1][1]}\n")
+
+            choice = int(input("1. Shoot Primary (2 TP)\n"
+                               "2. Shoot Secondary (2 TP)\n"
+                               "3. Peek and Shoot Primary (4 TP)\n"
+                               "4. Peek and Shoot Secondary (4 TP)\n\n"))
             turn = "Enemy"
             
         elif turn == "Enemy":
+            print("\n##################")
+            print("### ENEMY TURN ###")
+            print("##################")
+            print()
+
             if playerstats[1][5] != "safe":
                 gtype = random.choice(gun_types)
 
                 if gtype == "Primary":
-                    ammo, dmg = shoot(enemystats[1][2], enemystats[1][6])
+                    ammo, dmg, hits = shoot(enemystats[1][2], enemystats[1][6])
                     enemystats[1][6] = ammo
                     playerstats[1][0] -= dmg
-
-                    print(playerstats[1][0])
-
                     turn = "Player"
+
+                    gun = enemystats[1][2]
+
+                    msg(dmg, hits, gun)
 
                     if playerstats[1][0] <= 0:
                         playeralive = False
 
                 elif gtype == "Secondary":
-                    ammo, dmg = shoot(enemystats[1][3], enemystats[1][6])
+                    ammo, dmg, hits = shoot(enemystats[1][3], enemystats[1][6])
                     enemystats[1][6] = ammo
                     playerstats[1][0] -= dmg
-
-                    print(playerstats[1][0])
-
                     turn = "Player"
+                    gun = enemystats[1][3]
+
+                    msg(dmg, hits, gun)
 
                     if playerstats[1][0] <= 0:
                         playeralive = False
