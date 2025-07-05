@@ -309,7 +309,7 @@ def fight(playerstats, enmystats):
 The AS will, pretty much, always try to do the same thing. If the player is not safe, it will shoot. If the player is safe, it will peek and shoot (a new option that does not always work (every time a gun is fired, accuracy will be decided using random, but peek and shoot will have lower chances)). It will then use random to decide whether to take cover or not (probably around about a 50/50 chance).
 
 ```python
-def fight(playerstats, enmystats):
+def fight(playerstats, enemystats):
     while enemyalive == True and playeralive == True:
         if turn == "Player":
             #Allow the player to have their turn
@@ -330,10 +330,50 @@ If there is enough ammo, it wil go on to use random, but if not, will tell the e
 
 ```python
 else:
+    gtype = random.choice(gun_types)
     if gtype == "Secondary":
-        shoot(enmystats[1][2], enmystats[1][6])
+        shoot(enemystats[1][2], enemystats[1][6])
     elif gtype == "Primary":
-        shoot(enmystats[1][3], enmystats[1][6])
+        shoot(enemystats[1][3], enemystats[1][6])
 ```
 
 The ammo pool will be the total accumulation; i.e the ammo for the primary and secondary weapon combined.
+
+The shoot() function, as seen above, will take two arguments, the name of the gun and the amount of ammo remaining. For now, I will have it print "shots fired" and subtract 1 from the ammo pool
+
+```python
+def shoot(gtype, ammo):
+    print("Shots fired")
+    ammo -= 1
+    return ammo
+```
+
+This is a start, but in a fight scenarion is of no use whatsoever. It needs to deal damage. It will take in another argument, ophealth, which is the health of the operator who is getting shot at. It will, for now, decrease this by a flat amount of 10 HP, and return it.
+
+```python
+def shoot(gtype, ammo, ophealth):
+    print("Shots fired")
+    ammo -= 1
+    ophealth -= 10
+    return ammo, ophealth
+```
+
+Now I shall test this and see if it works as intended.
+
+### SCENE 5:
+
+It is all working, and I have it updating the lists until it reaches the player's death (as for now there is no way for the player to pick what they do). The AS picks between it's primary and secondary at random, which will play a part in changing both the amount of damage dealt and the accuracy. Now, I need to work on having a message printed, before then working on the player's interaction (where I will finally need to implemet the use of TP).
+
+The message will be fairly standard, and the same each time.
+
+>"{enemy name} shoots at you with their {gun name}, hitting you {hits} time(s) and dealing {damage} damage."
+
+And if they decide to hide behind something:
+
+>"{enemy name} is now {hidden} hidden"
+
+The variable "hidden" will be either not, partially or completely, showing the player their likelihood of hitting the enemy. This will be factored into the equation that decides how many shots hit.
+
+This means some new claculations need to be made, and some new variables need to be returned.
+
+I will experiment with some possibilites, and then put the code down below.
