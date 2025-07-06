@@ -408,3 +408,5 @@ Now, this new and improved damage system needs to update the operator's health. 
 ### SCENE 7:
 
 Now, the time has come to get player input. First, the player needs to know what happened during the AS's turn.
+
+Now that this has been achieved, and the layout has been cleaned up, it is now time to allow the player to make a decision. For now, they will just shoot, but then I will work on incorporating TP and other features.
