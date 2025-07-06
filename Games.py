@@ -3,6 +3,7 @@
 ###############
 
 from Operators import *
+from Fight import *
 import random
 
 ####################
